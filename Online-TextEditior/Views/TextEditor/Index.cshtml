@@ -1,0 +1,65 @@
+﻿@model Online_TextEditior.Models.TextEditorModel;
+
+@{
+}
+
+
+
+
+<h3>List of Availiable Contents</h3>
+
+
+<a href="/TextEditor/Create"><button class="btn-outline-primary float-right">+ NEW Content</button></a>
+
+<br />
+<br />
+@for (int i = 0; i < ViewBag.contentList.Count; i++)
+{
+    <div class="accordion accordion-flush" id="accordionFlushExample_@i">
+        <div class="accordion-item border border-dark">
+            <h2 class="accordion-header" id="flush-headingOne_@i">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne_@i" aria-expanded="false" aria-controls="flush-collapseOne">
+                    @ViewBag.contentList[i].Title
+                </button>
+            </h2>
+            <div id="flush-collapseOne_@i" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample_@i">
+                <div class="accordion-body">
+                    <table class="table table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Short Description</th>
+                                <th>Owner</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                        <td>@ViewBag.contentList[i].Id</td>
+                        <td>@ViewBag.contentList[i].Title</td>
+                        <td>@ViewBag.contentList[i].ShortDescription</td>
+                        <td>@ViewBag.contentList[i].UserEmail</td>
+                        <td>
+                           <div>
+                                        <a href="/TextEditor/Update?id=@ViewBag.contentList[i].Id">
+
+                               <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#createModel">Update</button>
+                               </a>
+
+                                        <a href="/"><button class="btn btn-outline-primary">Share</button></a>
+                                <a href="/TextEditor/Delete?Id=@ViewBag.contentList[i].Id"><button class="btn btn-outline-danger">Delete</button></a>
+                            </div>
+                        </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+}
+
+
+

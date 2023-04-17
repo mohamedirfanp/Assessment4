@@ -1,0 +1,47 @@
+﻿@model Online_TextEditior.Models.TextEditorModel;
+
+
+@{
+}
+
+
+<h3>Create a Content</h3>
+
+
+<div>
+    <form method="post" asp-controller="TextEditor" asp-action="Create">
+        <div class="col-form-label">
+            <label asp-for="UserEmail">UserEmail:</label>
+            <input type="text" asp-for="UserEmail" value="@ViewBag.content[0].UserEmail" />
+        </div>
+        <div class="col-form-label">
+            <label asp-for="Title" name="Title">Title:</label>
+            <input type="text" asp-for="Title" name="Title" id="title" />
+        </div>
+        <div class="col-form-label">
+            <label asp-for="ShortDescription">Short Description:</label>
+            <input type="text" asp-for="ShortDescription" id="description" />
+        </div>
+        <div class="col-form-label">
+            <label asp-for="SharedUsers">SharedUsers:</label>
+            <input type="text" asp-for="SharedUsers" id="users" placeholder="Enter user email separated by comma" size="50" />
+        </div>
+
+        <div class="form-group">
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" asp-for="TextDescription"></textarea>
+                <label for="floatingTextarea2" asp-for="TextDescription">Content</label>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <button class="btn btn-outline-primary" type="submit">Submit</button>
+        </div>
+
+    </form>
+</div>
+</div>
+<br />
+@*<div>
+    <button class="btn btn-outline-danger" style="margin-right: 10px;" data-bs-toggle="modal" data-bs-target="#createModel">Save</button>
+</div>*@
