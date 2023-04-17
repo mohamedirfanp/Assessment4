@@ -3,63 +3,88 @@
 @{
 }
 
-
-
-
-<h3>List of Availiable Contents</h3>
-
-
-<a href="/TextEditor/Create"><button class="btn-outline-primary float-right">+ NEW Content</button></a>
-
-<br />
-<br />
-@for (int i = 0; i < ViewBag.contentList.Count; i++)
+@if (string.IsNullOrEmpty(Online_TextEditior.Controllers.TextEditorController.UserEmail))
 {
-    <div class="accordion accordion-flush" id="accordionFlushExample_@i">
-        <div class="accordion-item border border-dark">
-            <h2 class="accordion-header" id="flush-headingOne_@i">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne_@i" aria-expanded="false" aria-controls="flush-collapseOne">
-                    @ViewBag.contentList[i].Title
-                </button>
-            </h2>
-            <div id="flush-collapseOne_@i" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample_@i">
-                <div class="accordion-body">
-                    <table class="table table-hover">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>ID</th>
-                                <th>Title</th>
-                                <th>Short Description</th>
-                                <th>Owner</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                        <td>@ViewBag.contentList[i].Id</td>
-                        <td>@ViewBag.contentList[i].Title</td>
-                        <td>@ViewBag.contentList[i].ShortDescription</td>
-                        <td>@ViewBag.contentList[i].UserEmail</td>
-                        <td>
-                           <div>
-                                        <a href="/TextEditor/Update?id=@ViewBag.contentList[i].Id">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Enter your Email</h5>
+            <form method="post" action="@Url.Action("Index", "TextEditor")">
+            <div class="col-form-label">
+                <label for="userEmail">UserEmail:</label>
+                <input type="text" name="userEmail" id="userEmail"  required/>
+                <br>
+             
+            </div>
+                <button class="btn btn-outline-dark" type="submit">Submit</button>
+        </form>
+        </div>
+    </div>
+    
+}
+else
+{
+    <label class="fw-bold top-0 end-0">Current User : @Online_TextEditior.Controllers.TextEditorController.UserEmail</label>
+    <h3>List of Availiable Contents</h3>
 
-                               <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#createModel">Update</button>
-                               </a>
 
-                                        <a href="/"><button class="btn btn-outline-primary">Share</button></a>
-                                <a href="/TextEditor/Delete?Id=@ViewBag.contentList[i].Id"><button class="btn btn-outline-danger">Delete</button></a>
-                            </div>
-                        </td>
-                        </tr>
-                        </tbody>
-                    </table>
+    <a href="/TextEditor/Create"><button class="btn-outline-primary float-right">+ NEW Content</button></a>
+
+    <br />
+    <br />
+    @for (int i = 0; i < ViewBag.contentList.Count; i++)
+    {
+        <div class="accordion accordion-flush" id="accordionFlushExample_@i">
+            <div class="accordion-item border border-dark">
+                <h2 class="accordion-header" id="flush-headingOne_@i">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne_@i" aria-expanded="false" aria-controls="flush-collapseOne">
+                        @ViewBag.contentList[i].Title
+                    </button>
+                </h2>
+                <div id="flush-collapseOne_@i" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample_@i">
+                    <div class="accordion-body">
+                        <table class="table table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Title</th>
+                                    <th>Short Description</th>
+                                    <th>Owner</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@ViewBag.contentList[i].Id</td>
+                                    <td>@ViewBag.contentList[i].Title</td>
+                                    <td>@ViewBag.contentList[i].ShortDescription</td>
+                                    <td>@ViewBag.contentList[i].UserEmail</td>
+                                    <td>
+                                        <div>
+                                            <a href="/TextEditor/Update?id=@ViewBag.contentList[i].Id">
+
+                                                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#createModel">Update</button>
+                                            </a>
+                                            @if(@ViewBag.contentList[i].UserEmail == Online_TextEditior.Controllers.TextEditorController.UserEmail)
+                                            {
+                                            <a href="/"><button class="btn btn-outline-primary">Share</button></a>
+                                                
+                                            }
+                                            <a href="/TextEditor/Delete?Id=@ViewBag.contentList[i].Id"><button class="btn btn-outline-danger">Delete</button></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <br />
+        <br />
+    }
 }
+
+
+
 
 
 

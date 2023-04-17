@@ -11,8 +11,8 @@
 <div>
     <form method="post" asp-controller="TextEditor" asp-action="Create">
         <div class="col-form-label">
-            <label asp-for="UserEmail">UserEmail:</label>
-            <input type="text" asp-for="UserEmail" />
+            <label asp-for="UserEmail">Owner:</label>
+            <input type="text" asp-for="UserEmail" value="@Online_TextEditior.Controllers.TextEditorController.UserEmail" disabled  />
         </div>
         <div class="col-form-label">
             <label asp-for="Title" name="Title">Title:</label>
@@ -36,6 +36,10 @@
         <br />
         <div class="form-group">
             <button class="btn btn-outline-primary" type="submit">Submit</button>
+            <a href="/TextEditor/Index">
+
+                <button class="btn btn-outline-danger">Cancel</button>
+            </a>
         </div>
 
     </form>
